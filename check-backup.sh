@@ -16,7 +16,7 @@ done
 IMAGES_PATH=/mnt/pve/backup/dump/
 
 vma_list=$(find "$IMAGES_PATH" -name "*.vma" -exec vma list {} \;)
-counter_vma_list=$(echo "$vma_list" | echo $(($(wc -l)/3)))
+counter_vma_list=$(echo "$vma_list" | echo $(( $(wc -l) / 3 )))
 
 dir_list=$(find "$IMAGES_PATH" -name "*.vma" -exec ls -l {} \;)
 counter_dir_list=$(echo "$dir_list" | wc -l)
