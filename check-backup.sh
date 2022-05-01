@@ -5,7 +5,7 @@ systemctl start hdd-backup-prep.service
 sleep 30 & PID=$!
 
 # in meantime show loading slash
-while kill -0 $PID
+while kill -0 $PID 2>/dev/zero
 do for i in '-' '\' '|' '/'
   do printf "\r$i"
    sleep 0.2
@@ -23,13 +23,13 @@ counter_dir_list=$(echo "$dir_list" | wc -l)
 
 # visual confirmation or warning
 if [ "$counter_vma_list" = "$counter_dir_list" ]; then
-  printf "\n%b\n" "#########################################"
+  printf "\n%b\n" "########################################"
   printf "\e[32m%s\e[0m%s\n" "🟢 Check went fine! " "Backups seem correct."
-  printf "%b\n" "#########################################"
+  printf "%b\n" "########################################"
 else
-  printf "\n%b\n" "###################################"
+  printf "\n%b\n" "##################################"
   printf "\e[31m%s\e[0m%s\n" "🔴 Error! " "Backups probably corrupt."
-  printf "%b\n" "###################################"
+  printf "%b\n" "##################################"
 fi
 
 systemctl start hdd-backup-suspend.service
